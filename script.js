@@ -32,7 +32,8 @@ function start(){
 		process();
 	})
 }
-
+var a=0
+var	b=0
 function process(){
 	var filtered_array=Json.flatMap((a,b)=>(a === parseInt(document.querySelector("#input").value)-3 ? b : []))
 	console.log(filtered_array)
@@ -58,6 +59,18 @@ function process(){
 	}
 	document.querySelector("#loading2").classList.add("hidden");
 	document.querySelector("#panel-container").classList.remove("hidden");
+	console.log(a,b)
+	setTimeout(() => {
+		a=screen.width
+		if(b==0){
+			b=document.querySelector("#panel-container").getClientRects()[0].width
+		}
+	  if(a<b){
+			document.querySelector("#panel-container").style.transform=`scale(${a/b})`
+			document.querySelector("#panel-container").style.height = document.querySelector("#panel-container").firstElementChild.clientHeight*(a/b)+"px";
+		}
+	}, 1)
+	
 }
 
 /* コンボ数を取得するために3^13回動かされる */
